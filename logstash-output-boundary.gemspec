@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
 
-  s.name            = 'logstash-output-boundry'
+  s.name            = 'logstash-output-boundary'
   s.version         = '0.1.0'
   s.licenses        = ['Apache License (2.0)']
   s.summary         = "This output lets you send annotations to Boundary based on Logstash events"
