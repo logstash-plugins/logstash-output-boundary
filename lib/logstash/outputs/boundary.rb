@@ -2,18 +2,16 @@
 require "logstash/outputs/base"
 require "logstash/namespace"
 
-
+# This output lets you send annotations to
+# Boundary based on Logstash events
+#
+# Note that since Logstash maintains no state
+# these will be one-shot events
+#
+# By default the start and stop time will be
+# the event timestamp
+#
 class LogStash::Outputs::Boundary < LogStash::Outputs::Base
-  # This output lets you send annotations to
-  # Boundary based on Logstash events
-  #
-  # Note that since Logstash maintains no state
-  # these will be one-shot events
-  #
-  # By default the start and stop time will be
-  # the event timestamp
-  #
-
   config_name "boundary"
   milestone 1
 
@@ -52,7 +50,7 @@ class LogStash::Outputs::Boundary < LogStash::Outputs::Base
   # If set to true, logstash will try to pull boundary fields out
   # of the event. Any field explicitly set by config options will
   # override these.
-  # ['type', 'subtype', 'creation_time', 'end_time', 'links', 'tags', 'loc']
+  # `['type', 'subtype', 'creation_time', 'end_time', 'links', 'tags', 'loc']`
   config :auto, :validate => :boolean, :default => false
 
   public
