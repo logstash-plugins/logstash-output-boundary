@@ -1,6 +1,7 @@
 # encoding: utf-8
 require "logstash/outputs/base"
 require "logstash/namespace"
+require "logstash/json"
 
 # This output lets you send annotations to
 # Boundary based on Logstash events
@@ -85,8 +86,8 @@ class LogStash::Outputs::Boundary < LogStash::Outputs::Base
     boundary_event = {
       'type' => event.sprintf("%{message}"),
       'subtype' => event.sprintf("%{type}"),
-      'start_time' => event["@timestamp"].to_i,
-      'end_time' => event["@timestamp"].to_i,
+      'start_time' => event.timestamp.to_i,
+      'end_time' => event.timestamp.to_i,
       'links' => [],
       'tags' => event["tags"],
     }.merge boundary_event
@@ -97,7 +98,7 @@ class LogStash::Outputs::Boundary < LogStash::Outputs::Base
     @logger.debug("Boundary event", :boundary_event => boundary_event)
 
     begin
-      request.body = boundary_event.to_json
+      request.body = LogStash::Json.dump(boundary_event)
       request.add_field("Content-Type", 'application/json')
       response = @client.request(request)
       @logger.warn("Boundary convo", :request => request.inspect, :response => response.inspect)
