@@ -67,7 +67,7 @@ class LogStash::Outputs::Boundary < LogStash::Outputs::Base
 
   public
   def receive(event)
-    return unless output?(event)
+    
 
     boundary_event = Hash.new
     boundary_keys = ['type', 'subtype', 'creation_time', 'end_time', 'links', 'tags', 'loc']
