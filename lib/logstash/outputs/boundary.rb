@@ -78,17 +78,17 @@ class LogStash::Outputs::Boundary < LogStash::Outputs::Base
     boundary_event['tags'] = @btags.collect { |x| event.sprintf(x) } if @btags
 
     if @auto
-      boundary_fields = event['@fields'].select { |k| boundary_keys.member? k }
+      boundary_fields = event.get('@fields').select { |k| boundary_keys.member? k }
       boundary_event = boundary_fields.merge boundary_event
     end
 
     boundary_event = {
       'type' => event.sprintf("%{message}"),
       'subtype' => event.sprintf("%{type}"),
-      'start_time' => event["@timestamp"].to_i,
-      'end_time' => event["@timestamp"].to_i,
+      'start_time' => event.get("@timestamp").to_i,
+      'end_time' => event("@timestamp").to_i,
       'links' => [],
-      'tags' => event["tags"],
+      'tags' => event.get("tags"),
     }.merge boundary_event
 
     request = Net::HTTP::Post.new(@uri.path)
