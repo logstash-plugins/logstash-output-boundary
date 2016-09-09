@@ -79,7 +79,7 @@ class LogStash::Outputs::Boundary < LogStash::Outputs::Base
     boundary_event['tags'] = @btags.collect { |x| event.sprintf(x) } if @btags
 
     if @auto
-      boundary_fields = event['@fields'].select { |k| boundary_keys.member? k }
+      boundary_fields = event.get('@fields').select { |k| boundary_keys.member? k }
       boundary_event = boundary_fields.merge boundary_event
     end
 
