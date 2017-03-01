@@ -1,3 +1,6 @@
+## 3.0.1
+  - Docs: Update doc examples to use new event API syntax 
+  
 ## 3.0.0
   - Uses the new plugin api
   - relax contraints on the logstash-core-plugin-api
