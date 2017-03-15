@@ -25,14 +25,14 @@ class LogStash::Outputs::Boundary < LogStash::Outputs::Base
   # Override the start time
   # Note that Boundary requires this to be seconds since epoch
   # If overriding, it is your responsibility to type this correctly
-  # By default this is set to `event["@timestamp"].to_i`
+  # By default this is set to `event.get("@timestamp").to_i`
   config :start_time, :validate => :string
 
   # End time
   # Override the stop time
   # Note that Boundary requires this to be seconds since epoch
   # If overriding, it is your responsibility to type this correctly
-  # By default this is set to `event["@timestamp"].to_i`
+  # By default this is set to `event.get("@timestamp").to_i`
   config :end_time, :validate => :string
 
   # Type
