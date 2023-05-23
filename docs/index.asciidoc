@@ -58,7 +58,7 @@ output plugins.
 ===== `api_key` 
 
   * This is a required setting.
-  * Value type is <<string,string>>
+  * Value type is <<password,password>>
   * There is no default value for this setting.
 
 Your Boundary API key
