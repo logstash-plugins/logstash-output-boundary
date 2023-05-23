@@ -16,7 +16,7 @@ class LogStash::Outputs::Boundary < LogStash::Outputs::Base
   config_name "boundary"
 
   # Your Boundary API key
-  config :api_key, :validate => :string, :required => true
+  config :api_key, :validate => :password, :required => true
 
   # Your Boundary Org ID
   config :org_id, :validate => :string, :required => true
@@ -93,7 +93,7 @@ class LogStash::Outputs::Boundary < LogStash::Outputs::Base
     }.merge boundary_event
 
     request = Net::HTTP::Post.new(@uri.path)
-    request.basic_auth(@api_key, '')
+    request.basic_auth(@api_key.value, '')
 
     @logger.debug("Boundary event", :boundary_event => boundary_event)
 
