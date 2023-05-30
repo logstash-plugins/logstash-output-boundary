@@ -1,3 +1,6 @@
+## 3.0.6
+  - Change `api_key` config type to `password` to prevent from leaks in debug logs [#8](https://github.com/logstash-plugins/logstash-output-boundary/pull/8)
+
 ## 3.0.5
   - Docs: Set the default_codec doc attribute.
 
